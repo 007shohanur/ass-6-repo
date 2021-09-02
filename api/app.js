@@ -1,13 +1,12 @@
-// search books
+
+const error = document.getElementById('error');
+const result = document.getElementById('result');
+const searchField = document.getElementById('search-field');
 const searchBook = () =>  {
-        // counts results id:
- 
-  const result = document.getElementById('result');
-              // input search fild id:
-    const searchField = document.getElementById('search-field');
     const searchText = searchField.value;
-    searchField.value = '';
-    
+    if(searchField.value === ''){
+      error.innerHTML = `<p>File is emty</p>`;
+    }
     
     const url = `https://openlibrary.org/search.json?q=${searchText}`;
   
@@ -15,6 +14,7 @@ const searchBook = () =>  {
 fetch(url)
 .then(res => res.json())
 .then(data => displaysearchResult(data.docs));
+searchField.value = '';
 }
 //  dusplay results:
 const displaysearchResult = books => {
@@ -28,10 +28,7 @@ const displaysearchResult = books => {
     searchResult.innerHTML = '';
     // error message
     if(books.length === 0){
-      const error = document.getElementById('error');
-      const div =document.createElement('div');
-      div.innerHTML = `<p>No Results Found</p>`;
-      error.append(div);
+    error.innerHTML = `<p">No Results Found</p>`;
     }
     else{
       books.forEach(book => {
