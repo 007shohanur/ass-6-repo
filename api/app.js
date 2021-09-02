@@ -3,10 +3,13 @@ const error = document.getElementById('error');
 const result = document.getElementById('result');
 const searchField = document.getElementById('search-field');
 const searchBook = () =>  {
+  error.innerHTML = '';
     const searchText = searchField.value;
     if(searchField.value === ''){
       error.innerHTML = `<p>File is emty</p>`;
+      return;
     }
+
     
     const url = `https://openlibrary.org/search.json?q=${searchText}`;
   
@@ -24,13 +27,13 @@ const displaysearchResult = books => {
    // input search fild result show:
     const searchResult = document.getElementById('search-result');
     // clear dom:
-    error.innerHTML = '';
+    
     searchResult.innerHTML = '';
     // error message
     if(books.length === 0){
     error.innerHTML = `<p">No Results Found</p>`;
     }
-    else{
+    
       books.forEach(book => {
         console.log(book);
         const div = document.createElement('div');
@@ -50,4 +53,4 @@ const displaysearchResult = books => {
       
     })
     }
-  }
+  
